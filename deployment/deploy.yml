@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - name: Simuler le déploiement
+      debug:
+        msg: "Application déployée avec succès"

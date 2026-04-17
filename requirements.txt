@@ -1,0 +1,8 @@
+streamlit 
+pytest
+selenium 
+webdriver-manager
+coverage
+pylint
+bandit
+ansible
