@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -8,11 +9,12 @@ pipeline {
                 bat 'echo Build successful'
             }
         }
+
         stage('Install dependencies') {
             steps {
                 bat '''
-                python -m pip install --upgrade pip
-                python -m pip install -r requirements.txt
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
                 '''
             }
         }
@@ -31,24 +33,24 @@ pipeline {
 
         stage('Static Analysis') {
             steps {
-                bat 'coverage run -m pytest'
-                bat 'coverage report --fail-under=70'
-                bat 'pylint logic data app.py'
-                bat 'bandit -r app.py logic data'
+                bat '''
+                    coverage run -m pytest tests/test_services.py tests/test_integration.py
+                    coverage report --fail-under=70
+                    pylint logic data app.py
+                    bandit -r app.py logic data
+                '''
             }
         }
 
         stage('Functional Tests') {
             steps {
                 bat '''
-                    start /B streamlit run app.py
-                    timeout /t 10
+                    start /B streamlit run app.py --server.headless true
+                    timeout /t 15
                     python -m pytest tests/test_functional.py
                 '''
             }
         }
-
-        
 
         stage('Deploy') {
             steps {
@@ -56,4 +58,12 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            bat 'taskkill /F /IM streamlit.exe >nul 2>&1 || exit 0'
+            bat 'taskkill /F /IM python.exe >nul 2>&1 || exit 0'
+        }
+    }
 }
+```
