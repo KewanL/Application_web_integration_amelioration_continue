@@ -33,7 +33,7 @@ pipeline {
         stage('Start Application') {
             steps {
                 bat """
-                    start /B python -m streamlit run app.py --server.port 8501
+                    bat 'start /B python -m streamlit run app.py --server.port 8501 --browser.gatherUsageStats false'
                     ping 127.0.0.1 -n 15 > nul
                 """
             }
