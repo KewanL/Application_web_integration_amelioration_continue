@@ -55,9 +55,19 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        // stage('Deploy') {
+        //    steps {
+        //        bat 'ansible-playbook deployment/deploy.yml'
+        //    }
+        //}
+        stage('Deploy') {   // Simulated deployment step en raison de l'environnement de test
             steps {
-                bat 'ansible-playbook deployment/deploy.yml'
+                bat '''
+                echo "Simulating deployment to production environment"
+                mkdir deploy_output || exit 0
+                copy app.py deploy_output\\
+                echo Deployment completed
+                '''
             }
         }
     }
