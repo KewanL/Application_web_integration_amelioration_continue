@@ -34,7 +34,7 @@ pipeline {
             steps {
                 bat """
                     start /B python -m streamlit run app.py --server.port 8501
-                    timeout /t 15
+                    ping 127.0.0.1 -n 15 > nul
                 """
             }
         }
