@@ -40,9 +40,15 @@ pipeline {
 
         stage('Functional Tests') {
             steps {
-                bat 'python -m pytest tests/test_functional.py'
+                bat '''
+                    start /B streamlit run app.py
+                    timeout /t 10
+                    python -m pytest tests/test_functional.py
+                '''
             }
         }
+
+        
 
         stage('Deploy') {
             steps {
