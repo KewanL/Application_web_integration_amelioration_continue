@@ -8,6 +8,14 @@ pipeline {
                 bat 'echo Build successful'
             }
         }
+        stage('Install dependencies') {
+            steps {
+                bat '''
+                python -m pip install --upgrade pip
+                python -m pip install -r requirements.txt
+                '''
+            }
+        }
 
         stage('Unit Tests') {
             steps {
