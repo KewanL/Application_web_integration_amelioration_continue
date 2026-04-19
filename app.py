@@ -2,7 +2,7 @@ import streamlit as st
 from logic import services
 from data import repository
 
-st.title("🎬 Cinéma App")
+st.title("Cinéma App")
 
 menu = st.sidebar.selectbox("Menu", ["Ajouter Film", "Ajouter Membre", "Acheter Film"])
 
