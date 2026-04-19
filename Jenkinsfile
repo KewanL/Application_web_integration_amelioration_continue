@@ -55,21 +55,21 @@ pipeline {
             }
         }
 
-         stage('Deploy') {
-            steps {
-                bat 'wsl ansible-playbook deployment/deploy.yml'
-            }
-        }
-        //stage('Deploy') {   // Simulated deployment step en raison de l'environnement de test
+        // stage('Deploy') {
         //    steps {
-        //        bat '''
-        //        echo "Simulating deployment to production environment"
-        //        mkdir deploy_output || exit 0
-        //        copy app.py deploy_output\\
-        //        echo Deployment completed
-        //        '''
+        //        bat 'wsl ansible-playbook deployment/deploy.yml'
         //    }
         //}
+        stage('Deploy') {   // Simulated deployment step en raison de l'environnement de test
+            steps {
+                bat '''
+                echo "Simulating deployment to production environment"
+                mkdir deploy_output || exit 0
+                copy app.py deploy_output\\
+                echo Deployment completed
+                '''
+            }
+        }
     }
 
     post {
