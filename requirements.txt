@@ -6,3 +6,5 @@ coverage
 pylint
 bandit
 ansible
+newrelic
+psutil

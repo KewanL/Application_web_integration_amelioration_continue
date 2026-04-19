@@ -37,15 +37,15 @@ def test_home_page_title(driver):
     title_element = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
     assert "Cinéma App" in title_element.text
 
-# --- TEST 2 : Navigation vers "Ajouter Membre" ---
-def test_navigation_to_add_member(driver):
+# --- TEST 2 : Navigation vers "Acheter Film" ---
+def test_navigation_to_buy_movie(driver):
     driver.get("http://localhost:8501")
     wait = WebDriverWait(driver, 15)
     
-    navigate_to_menu(driver, wait, "Ajouter Membre")
+    navigate_to_menu(driver, wait, "Acheter Film")
     
     header = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h2")))
-    assert "Ajouter un membre" in header.text
+    assert "Acheter un film" in header.text
 
 # --- TEST 3 : Ajouter un membre (Scénario complet) ---
 def test_add_member_flow(driver):
@@ -78,6 +78,6 @@ def test_add_member_flow(driver):
     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Ajouter')]")))
     button.click()
 
-    # Vérification du message de succès (Requis pour la section 2.4) [2]
+    # Vérification du message de succès
     success_msg = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".stAlert")))
     assert "succès" in success_msg.text.lower() or "ajouté" in success_msg.text.lower()
